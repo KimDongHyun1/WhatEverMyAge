@@ -2,10 +2,10 @@ from django.urls import path, include
 from .models import Blog, Comment
 from rest_framework import serializers
 
-class BlogSerializer(serializers.HyperlinkedModelSerializer):
+class BlogSerializer(serializers.HyperlinkedModelSerializer): 
     class Meta:
         model = Blog
-        fields = ['title','content','photo','gps','like','created']
+        fields = ['title','content','photo','gps','like','created']#,'user'
 
 class BlogDetailSerializer(serializers.HyperlinkedModelSerializer):
     #owner = serializers.ReadOnlyField(source='owner.username')
@@ -16,10 +16,10 @@ class BlogDetailSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['title','content']
 
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
+class CommentSerializer(serializers.ModelSerializer): #Hyperlinked
     class Meta:
         model = Comment
-        fields = ['blog','reply','c_created'] #'blog','url' 넣으면안됨
+        fields = ['blog','reply','c_created','user'] #'blog','url' 넣으면안됨
         #물어보기 'blog'를 넣으면 댓글은 달리는데  ## api/v1/blog/comment에서 댓글쓰고 POST하기됨
         # blog/<int:pk>/comment/를 들어가면 안됨
 
