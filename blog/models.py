@@ -20,7 +20,6 @@ class Blog(models.Model):
     class Meta:
         ordering = ['-created']
 
-    
 
 
 class Comment(models.Model):
@@ -36,4 +35,4 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-c_created']
        
-    
+# 비밀번호  ,친구추가
