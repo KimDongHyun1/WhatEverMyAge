@@ -154,4 +154,9 @@ DATABASES['default'].update(db_from_env)
 
 
 
-
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'users.serializers.MyCustomTokenSerializer',
+    #'TOKEN_SERIALIZER': 'users/serializers/MyCustomTokenSerializer',
+    #'TOKEN_SERIALIZER': 'path.to.custom.MyCustomTokenSerializer',
+    #'TOKEN_SERIALIZER': 'Project.path.to.MyCustomTokenSerializer',
+}

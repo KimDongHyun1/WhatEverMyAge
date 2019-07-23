@@ -3,6 +3,7 @@ from .models import CustomerUser
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_auth.serializers import LoginSerializer
 from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 
 from allauth.account.adapter import get_adapter
 from allauth.account import app_settings as allauth_settings
@@ -13,6 +14,13 @@ class CustomLoginSerializer(ModelSerializer,LoginSerializer):
     class Meta:
         model = CustomerUser
         fields = ['username','password','id']
+
+class MyCustomTokenSerializer(serializers.ModelSerializer):
+    user = CustomLoginSerializer(read_only=True)
+
+    class Meta:
+        model = Token
+        fields = ('key', 'user')
 
 class CustomRegisterSerializer(ModelSerializer,RegisterSerializer):
     class Meta:
@@ -72,13 +80,5 @@ class UserSerializer(ModelSerializer):
         fields = ['id', 'username',"user_photo"]
 
 
-class NameSerializer(ModelSerializer):
-    class Meta:
-        model = CustomerUser
-        fields = ['username',]
 
-class PasswordSerializer(ModelSerializer):
-    class Meta:
-        model = CustomerUser
-        fields = ['password',]
 

@@ -1,4 +1,4 @@
-from .serializers import UserSerializer,CustomLoginSerializer,CustomRegisterSerializer, NameSerializer, PasswordSerializer
+from .serializers import UserSerializer,CustomLoginSerializer,CustomRegisterSerializer,LoginSerializer
 from .models import CustomerUser
 from rest_framework import generics
 from rest_auth.views import LoginView, LogoutView
@@ -12,6 +12,22 @@ from django.contrib.auth import authenticate, login
 from rest_framework.parsers import JSONParser
 from rest_framework import serializers
 from django.http import HttpResponse, JsonResponse
+
+
+
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
+from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.debug import sensitive_post_parameters
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
+
 
 class RegisterUserView(generics.ListCreateAPIView):
     queryset = CustomerUser.objects.all()
@@ -36,19 +52,6 @@ class CustomLogin(LoginView):
     queryset = CustomerUser.objects.all()
     serializer_class = CustomLoginSerializer
 
-    # 직렬화? http://raccoonyy.github.io/drf3-tutorial-1.html
-    def post(self,request):
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-
-        if user is not None: 
-            login(request, user)     
-            return Response(request.data, status=status.HTTP_201_CREATED)
-
-        else:
-            return Response({'error' : 'error'})
-
 
 
 
@@ -64,3 +67,5 @@ class UserView(generics.ListCreateAPIView):
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomerUser.objects.all()
     serializer_class = UserSerializer
+
+
