@@ -68,13 +68,17 @@ class CustomRegisterSerializer(ModelSerializer,RegisterSerializer):
         self.custom_signup(request, user)
         return user
         
-class CustomSerializer(ModelSerializer):
+class CustomSerializer(serializers.HyperlinkedModelSerializer):
+    user_photo = serializers.ImageField(use_url=True)
+
     class Meta:
         model = CustomerUser
         fields = ['id', 'username', 'user_photo']
 
 
-class UserSerializer(ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    user_photo = serializers.ImageField(use_url=True)
+
     class Meta:
         model = CustomerUser
         fields = ['id', 'username',"user_photo"]
