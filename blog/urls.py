@@ -8,6 +8,6 @@ router.register('comment', blog_views.CommentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('blogs/<int:pk>/', blog_views.blog_detail),
+    #path('blogs/<int:pk>/', blog_views.blog_detail),
     path('blog/<int:pk>/comment/', blog_views.blog_comment), 
 ]   

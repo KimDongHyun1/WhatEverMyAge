@@ -9,25 +9,21 @@ class BlogViewSet(viewsets.ModelViewSet):
     serializer_class = BlogSerializer
 
 
-
-
-
-
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
 
-@csrf_exempt
-def blog_detail(request, pk):
-    try:
-        blog = Blog.objects.get(pk=pk)
-    except Blog.DoesNotExist:
-        return HttpResponse(status=404)
+# @csrf_exempt
+# def blog_detail(request, pk):
+#     try:
+#         blog = Blog.objects.get(pk=pk)
+#     except Blog.DoesNotExist:
+#         return HttpResponse(status=404)
 
-    if(request.method=='GET'):
-        serializer = BlogDetailSerializer(Blog, context={'request':request})
-        return JsonResponse(serializer.data)
+#     if(request.method=='GET'):
+#         serializer = BlogDetailSerializer(Blog, context={'request':request})
+#         return JsonResponse(serializer.data)
 
 
 
