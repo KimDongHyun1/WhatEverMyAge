@@ -69,19 +69,21 @@ class CustomRegisterSerializer(ModelSerializer,RegisterSerializer):
         return user
         
 class CustomSerializer(serializers.HyperlinkedModelSerializer):
-    user_photo = serializers.ImageField(use_url=True)
+    user_photo = serializers.FileField(use_url=True)
 
     class Meta:
         model = CustomerUser
         fields = ['id', 'username', 'user_photo']
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    user_photo = serializers.ImageField(use_url=True)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    user_photo = serializers.FileField(use_url=True) #댓글떄도 써보기
 
     class Meta:
         model = CustomerUser
-        fields = ['id', 'username',"user_photo"]
+        fields = ['id', 'username',"user_photo",'password']
 
 
 

@@ -3,12 +3,11 @@ from django.utils import timezone
 from users.models import CustomerUser
 
 class Blog(models.Model):
-    #pr = models.TextField(blank=True,unique=True,primary_key=True) 
-    user = models.ForeignKey(CustomerUser, on_delete='CASCADE')
-    like = models.IntegerField(default=0)
-    title = models.TextField()
-    content = models.TextField()
-    photo = models.ImageField(blank=True) #default = "경로/사진.jpg" 지정하면 기본사진으로 됨
+    #user = models.ForeignKey(CustomerUser, on_delete='CASCADE')
+    like = models.IntegerField(default=0, blank=True)
+    title = models.TextField(blank=True)
+    content = models.TextField(blank=True)
+    photo = models.ImageField(blank=True, null=True) #default = "경로/사진.jpg" 지정하면 기본사진으로 됨
     gps = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

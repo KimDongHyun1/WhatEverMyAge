@@ -2,10 +2,17 @@ from django.urls import path, include
 from .models import Blog, Comment
 from rest_framework import serializers
 
-class BlogSerializer(serializers.HyperlinkedModelSerializer): 
+# class BlogSerializer(serializers.HyperlinkedModelSerializer): 
+#     class Meta:
+#         model = Blog
+#         fields = ['title','content','photo','gps','like','created','user'] #,'user'
+
+class BlogSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = Blog
-        fields = ['title','content','photo','gps','like','created']#,'user'
+        fields = ('title','content','like','photo','gps','created','updated') #'user',
+
 
 class BlogDetailSerializer(serializers.HyperlinkedModelSerializer):
     #owner = serializers.ReadOnlyField(source='owner.username')
@@ -13,10 +20,10 @@ class BlogDetailSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ['title','content']
+        fields = ['title','content','photo']
 
 
-class CommentSerializer(serializers.ModelSerializer): #Hyperlinked
+class CommentSerializer(serializers.HyperlinkedModelSerializer): #Hyperlinked
     class Meta:
         model = Comment
         fields = ['blog','reply','c_created','user'] #'blog','url' 넣으면안됨

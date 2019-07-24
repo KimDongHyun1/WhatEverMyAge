@@ -9,6 +9,10 @@ class BlogViewSet(viewsets.ModelViewSet):
     serializer_class = BlogSerializer
 
 
+
+
+
+
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
