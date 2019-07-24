@@ -1,15 +1,18 @@
-from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 from .models import Blog, Comment
 from .serializers import BlogSerializer, CommentSerializer, BlogDetailSerializer, CommentreSerializer
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt  
 
-class BlogViewSet(viewsets.ModelViewSet):
+
+
+
+class BlogViewSet(ModelViewSet):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
 
 
-class CommentViewSet(viewsets.ModelViewSet):
+class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 

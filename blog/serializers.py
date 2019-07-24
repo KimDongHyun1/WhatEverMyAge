@@ -2,16 +2,11 @@ from django.urls import path, include
 from .models import Blog, Comment
 from rest_framework import serializers
 
-# class BlogSerializer(serializers.HyperlinkedModelSerializer): 
-#     class Meta:
-#         model = Blog
-#         fields = ['title','content','photo','gps','like','created','user'] #,'user'
-
 class BlogSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ('title','content','like','photo','gps','created','updated') #'user',
+        fields = ('title','content','like','photo','gps','created','updated','id') #'user',
 
 
 class BlogDetailSerializer(serializers.HyperlinkedModelSerializer):
