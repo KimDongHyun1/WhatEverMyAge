@@ -75,9 +75,6 @@ class CustomSerializer(serializers.HyperlinkedModelSerializer):
         model = CustomerUser
         fields = ['id', 'username', 'user_photo']
 
-
-
-
 class UserSerializer(serializers.ModelSerializer):
     user_photo = serializers.FileField(use_url=True) #댓글떄도 써보기
 
