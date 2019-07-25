@@ -6,7 +6,7 @@ class BlogSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Blog
-        fields = ('title','content','like','photo','gps','created','updated','id') #'user',
+        fields = ('photo','title') #('title','content','like','photo','gps','created','updated','id') #'user',
 
 
 class BlogDetailSerializer(serializers.HyperlinkedModelSerializer):
