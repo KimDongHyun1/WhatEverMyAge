@@ -1,32 +1,28 @@
-from django.urls import path, include
-from .models import Blog, Comment
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
+from .models import Posting, Comment
+from rest_framework.fields import ReadOnlyField
 
-class BlogSerializer(serializers.HyperlinkedModelSerializer):
-
+class PostingSerializer(serializers.HyperlinkedModelSerializer): #
+    author_username = ReadOnlyField(source='author.username')
     class Meta:
-        model = Blog
-        fields = ('photo','title') #('title','content','like','photo','gps','created','updated','id') #'user',
+        model = Posting
+        fields = ('id','author_username','title','like','content','photo','gps','created','updated','url') 
 
 
-class BlogDetailSerializer(serializers.HyperlinkedModelSerializer):
-    #owner = serializers.ReadOnlyField(source='owner.username')
-    #comment = serializers.PrimaryKeyRelatedField(many=True, queryset=Comment.objects.all())#이걸로 뭘 해야함 디테일에서 쪼로록 나올려면
 
+class PostingDetailSerializer(serializers.HyperlinkedModelSerializer):
+    author_username = ReadOnlyField(source='author.username')
     class Meta:
-        model = Blog
-        fields = ['title','content','photo']
+        model = Posting
+        fields = ('id','author_username','title','like','content','photo','gps','created','updated')
 
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer): #Hyperlinked
-    class Meta:
-        model = Comment
-        fields = ['blog','reply','c_created','user'] #'blog','url' 넣으면안됨
-        #물어보기 'blog'를 넣으면 댓글은 달리는데  ## api/v1/blog/comment에서 댓글쓰고 POST하기됨
-        # blog/<int:pk>/comment/를 들어가면 안됨
 
-class CommentreSerializer(serializers.HyperlinkedModelSerializer):
+class CommentSerializer(serializers.    ModelSerializer):
+    #posting = ReadOnlyField(source='posting')
+    author_username = ReadOnlyField(source='author.username')
     class Meta:
         model = Comment
-        fields = ['reply','c_created','c_updated']
+        fields = ('author_username','posting','reply','c_created','c_updated')
 

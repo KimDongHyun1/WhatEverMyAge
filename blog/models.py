@@ -2,10 +2,10 @@ from django.db import models
 from django.utils import timezone
 from users.models import CustomerUser
 
-class Blog(models.Model):
-    #user = models.ForeignKey(CustomerUser, on_delete='CASCADE')
+class Posting(models.Model):
+    author = models.ForeignKey(CustomerUser, on_delete='CASCADE')
+    title = models.CharField(max_length=100)
     like = models.IntegerField(default=0, blank=True)
-    title = models.TextField(blank=True)
     content = models.TextField(blank=True)
     photo = models.ImageField(blank=True, null=True) #default = "경로/사진.jpg" 지정하면 기본사진으로 됨
     gps = models.TextField(blank=True, null=True)
@@ -22,8 +22,8 @@ class Blog(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(CustomerUser, on_delete='CASCADE')
-    blog = models.ForeignKey(Blog, on_delete='CASCADE')
+    author = models.ForeignKey(CustomerUser, on_delete='CASCADE')
+    posting = models.ForeignKey(Posting, on_delete='CASCADE')
     reply = models.TextField(max_length=200, blank=False)
     c_created = models.DateTimeField(auto_now_add=True)
     c_updated = models.DateTimeField(auto_now=True) 

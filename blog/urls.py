@@ -1,14 +1,13 @@
 from django.urls import path, include
 from rest_framework import routers
-from blog import views as blog_views #from board.views import PostingViewSet, CommentViewSet
+from blog.views import PostingViewSet,CommentViewSet,posting_detail, posting_comments
 
-router=routers.DefaultRouter()
-router.register('blog', blog_views.BlogViewSet)
-router.register('comment', blog_views.CommentViewSet)
+router = routers.DefaultRouter()
+router.register('postings', PostingViewSet)
+router.register('comments', CommentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    
-    path('blog/<int:pk>/comment/', blog_views.blog_comment), 
-]   
-#path('blogs/<int:pk>/', blog_views.blog_detail),
+    path('postings/<int:pk>', posting_detail, name="posting_detail"),
+    path('postings/<int:pk>/comments', posting_comments)
+]

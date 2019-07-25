@@ -1,47 +1,66 @@
-from rest_framework.viewsets import ModelViewSet
-from .models import Blog, Comment
-from .serializers import BlogSerializer, CommentSerializer, BlogDetailSerializer, CommentreSerializer
-from django.http import HttpResponse, JsonResponse
+from rest_framework import viewsets
+from .models import Posting, Comment
+from .serializers import PostingSerializer, CommentSerializer, PostingDetailSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt  
+from django.http import JsonResponse
+from rest_framework import status
+from rest_framework.parsers import JSONParser
 
+class PostingViewSet(viewsets.ModelViewSet):
+    queryset = Posting.objects.all()
+    serializer_class = PostingSerializer
+    #permission_classes = [IsAuthenticated]
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
-
-class BlogViewSet(ModelViewSet):
-    queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
-
-
-class CommentViewSet(ModelViewSet):
+class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
-
-# @csrf_exempt
-# def blog_detail(request, pk):
-#     try:
-#         blog = Blog.objects.get(pk=pk)
-#     except Blog.DoesNotExist:
-#         return HttpResponse(status=404)
-
-#     if(request.method=='GET'):
-#         serializer = BlogDetailSerializer(Blog, context={'request':request})
-#         return JsonResponse(serializer.data)
-
-
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
 @csrf_exempt
-def blog_comment(request, pk):
+def posting_detail(request, pk):
     try:
-        comment = Blog.objects.get(pk=pk).comment_set.all() # 이걸로 댓글 모으기!!
-    except Blog.DoesNotExist:
-        return HttpResponse(status=404)
+        posting = Posting.objects.get(pk=pk)
+    except Posting.DoesNotExist:
+        return JsonResponse({'POSTING DOES NOT':'POSTING DOES NOT'}, status=400)
+    
+    if request.method == 'GET':
+        serializer = PostingDetailSerializer(posting, context={'request': request})
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = PostingDetailSerializer(posting, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse({'PUT ERROR':'PUT ERROR'}, status=400)
+
+    elif request.method == 'DELETE':
+        posting.delete()
+        return JsonResponse({'DELETE SUCCESS':'DELETE SUCCESS'}, status=204)
+
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+@csrf_exempt
+def posting_comments(request, pk):
+    try:
+        comments = Posting.objects.get(pk=pk).comment_set.all()
+    except Posting.DoesNotExist:
+        return JsonResponse({'POSTING DOES NOT':'POSTING DOES NOT'})
     except Comment.DoesNotExist:
-        return HttpResponse(status=404)
-    if(len(comment) == 0 ):
-        return HttpResponse(status=404)
-
-    if(request.method=='GET'):
-        serializer = CommentreSerializer(comment, many=True)
+        return JsonResponse({'COMMENT DOES NOT':'COMMENT DOES NOT'})
+    if len(comments) == 0:
+        return JsonResponse({'COMMENT IS 0':'COMMENT IS 0'})
+    
+    if request.method == 'GET':
+        serializer = CommentSerializer(comments, many=True)
         return JsonResponse(serializer.data, safe=False)
-

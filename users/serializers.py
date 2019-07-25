@@ -17,7 +17,6 @@ class CustomLoginSerializer(ModelSerializer,LoginSerializer):
 
 class MyCustomTokenSerializer(serializers.ModelSerializer):
     user = CustomLoginSerializer(read_only=True)
-
     class Meta:
         model = Token
         fields = ('key', 'user')
@@ -27,11 +26,9 @@ class CustomRegisterSerializer(ModelSerializer,RegisterSerializer):
         model = CustomerUser
         fields = ['username','password1','password2','id']
 
-
     def validate_id(self,id):
         id = get_adapter().clean_id(id)
         return id
-
 
     def validate_username(self, username):
         username = get_adapter().clean_username(username)
