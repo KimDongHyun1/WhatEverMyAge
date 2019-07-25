@@ -7,6 +7,7 @@ from users import views as users_views
 urlpatterns = [
     path('registration/', RegisterUserView.as_view()),
     #path('registration/<int:pk>'),
+    #path('logina/', CustomLoginView.as_view()),
     path('login/', CustomLogin.as_view()),
     path('', include('rest_auth.urls')),
     path('logout/', CustomLogout.as_view()),
@@ -16,4 +17,5 @@ urlpatterns = [
     path('log/', login, name="login"),
 ]
 #urlpatterns = format_suffix_patterns(urlpatterns)
+
 

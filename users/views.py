@@ -25,14 +25,15 @@ from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.parsers import FileUploadParser
+from rest_framework import authentication, permissions
 
-class CustomLoginView(LoginView):
-    def get_response(self):
-        orginal_response = super().get_response()
-        mydata = {"message": "some message", "status": "success"}
-        orginal_response.data.update(mydata)
-        return orginal_response
-
+# class CustomLoginView(LoginView):
+#     def get_response(self):
+#         orginal_response = super().get_response()
+#         mydata = {"message": "some message", "status": "success"}
+#         orginal_response.data.update(mydata)
+#         #return orginal_response
+#         return Response({'mydata' : mydata}, status=status.HTTP_201_CREATED)
 
 
 class RegisterUserView(generics.ListCreateAPIView):
@@ -52,6 +53,7 @@ class RegisterUserView(generics.ListCreateAPIView):
         return Response(data=serializer.errors ,status=status.HTTP_400_BAD_REQUEST)
 
 class CustomLogin(LoginView):
+    authentication_classes = (authentication.TokenAuthentication,)
     queryset = CustomerUser.objects.all()
     serializer_class = CustomLoginSerializer
 
