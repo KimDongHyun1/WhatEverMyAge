@@ -23,7 +23,7 @@ def post_list(request):
         postings = Posting.objects.all()
         serializer = PostingSerializer(postings, many=True)
         count = len(serializer.data)
-        return Response({"count":count, "data" : serializer.data})
+        return Response(serializer.data)
 
     elif request.method == 'POST':
         serializer = PostingSerializer(data=request.data)
