@@ -77,38 +77,38 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+#    def perform_create(self, serializer):
+#        serializer.save(author=self.request.user)
 
-@csrf_exempt
-def posting_detail(request, pk):
-    try:
-        posting = Posting.objects.get(pk=pk)
-    except Posting.DoesNotExist:
-        return JsonResponse({'POSTING DOES NOT':'POSTING DOES NOT'}, status=400)
+# @csrf_exempt
+# def posting_detail(request, pk):
+#     try:
+#         posting = Posting.objects.get(pk=pk)
+#     except Posting.DoesNotExist:
+#         return JsonResponse({'POSTING DOES NOT':'POSTING DOES NOT'}, status=400)
     
-    if request.method == 'GET':
-        serializer = PostingDetailSerializer(posting, context={'request': request})
-        return JsonResponse(serializer.data)
+#     if request.method == 'GET':
+#         serializer = PostingDetailSerializer(posting, context={'request': request})
+#         return JsonResponse(serializer.data)
 
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = PostingDetailSerializer(posting, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse({'PUT ERROR':'PUT ERROR'}, status=400)
+#     elif request.method == 'PUT':
+#         data = JSONParser().parse(request)
+#         serializer = PostingDetailSerializer(posting, data=data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return JsonResponse(serializer.data)
+#         return JsonResponse({'PUT ERROR':'PUT ERROR'}, status=400)
 
-    elif request.method == 'DELETE':
-        posting.delete()
-        return JsonResponse({'DELETE SUCCESS':'DELETE SUCCESS'}, status=204)
+#     elif request.method == 'DELETE':
+#         posting.delete()
+#         return JsonResponse({'DELETE SUCCESS':'DELETE SUCCESS'}, status=204)
 
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(author=self.request.user)
 
 @csrf_exempt
-def posting_comments(request, pk):
+def post_comments(request, pk):
     try:
         comments = Posting.objects.get(pk=pk).comment_set.all()
     except Posting.DoesNotExist:

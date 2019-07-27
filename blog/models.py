@@ -22,16 +22,16 @@ class Posting(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(CustomerUser, on_delete='CASCADE')
+#    author = models.ForeignKey(CustomerUser, on_delete='CASCADE')
     posting = models.ForeignKey(Posting, on_delete='CASCADE')
     reply = models.TextField(max_length=200, blank=False)
-    c_created = models.DateTimeField(auto_now_add=True)
-    c_updated = models.DateTimeField(auto_now=True) 
+#    c_created = models.DateTimeField(auto_now_add=True)
+#    c_updated = models.DateTimeField(auto_now=True) 
 
 #    def __str__(self):
 #        return self.c_name + ':' + self.text
 
-    class Meta:
-        ordering = ['-c_created']
+#    class Meta:
+#        ordering = ['-c_created']
        
 # 비밀번호  ,친구추가
