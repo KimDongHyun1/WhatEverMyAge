@@ -10,7 +10,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('a', UserUploadedPicture.as_view()), 
 
-    path('b/', post_list),
+    path('abc/', post_list),
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)
