@@ -22,7 +22,8 @@ def post_list(request):
     if request.method == 'GET':
         postings = Posting.objects.all()
         serializer = PostingSerializer(postings, many=True)
-        return Response(serializer.data)
+        count = len(serializer.data)
+        return Response({"count":count, "data" : serializer.data})
 
     elif request.method == 'POST':
         serializer = PostingSerializer(data=request.data)
@@ -66,15 +67,6 @@ class PostingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-
-
-
-
-
-    
-
-
-    
 
 
 class CommentViewSet(viewsets.ModelViewSet):

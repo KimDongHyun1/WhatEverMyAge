@@ -13,5 +13,5 @@ urlpatterns = [
 
     path('postings/', post_list, name="post_list"),
     path('postings/<int:pk>', post_detail, name="post_detail"),
-    # path('postings/<int:pk>/comments', post_comments, name="post_comments")
+    path('postings/<int:pk>/comments', post_comments, name="post_comments")
 ]
