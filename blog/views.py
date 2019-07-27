@@ -26,6 +26,33 @@ def post_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+        def perform_create(self, serializer):
+           serializer.save(author=self.request.user)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def post_detail(request, pk):
+    try:
+        posting = Posting.objects.get(pk=pk)
+    except Posting.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = PostingSerializer(posting)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = PostingSerializer(posting, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        posting.delete()
+        return Response({'DELETE SUCCESS' : 'DELETE SUCCESS'}, status=status.HTTP_204_NO_CONTENT)
+
+
 
 class PostingViewSet(viewsets.ModelViewSet):
     parser_classes = (MultiPartParser,JSONParser)
