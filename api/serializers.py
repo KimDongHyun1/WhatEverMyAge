@@ -1,7 +1,8 @@
+#from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from rest_framework import serializers
-from .models import File
+from .models import Pictures
 
-class FileSerializer(serializers.ModelSerializer):
+class PictureSerializer(serializers.ModelSerializer):
     class Meta:
-        model = File
-        fields = "__all__"
+        model = Pictures
+        fields = ('picture',)
