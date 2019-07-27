@@ -3,11 +3,11 @@ from rest_framework.serializers import ModelSerializer
 from .models import Posting, Comment
 from rest_framework.fields import ReadOnlyField
 
-class PostingSerializer(serializers.HyperlinkedModelSerializer): #
-    author_username = ReadOnlyField(source='author.username')
+class PostingSerializer(serializers.ModelSerializer): #Hyperlinked
+    #author_username = ReadOnlyField(source='author.username')
     class Meta:
         model = Posting
-        fields = ('id','author_username','title','like','content','photo','gps','created','updated','url') 
+        fields = ('title',)#('id','author_username','title','like','content','photo','gps','created','updated')#url 
 
 
 

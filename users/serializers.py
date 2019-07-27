@@ -4,11 +4,9 @@ from rest_auth.registration.serializers import RegisterSerializer
 from rest_auth.serializers import LoginSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-
 from allauth.account.adapter import get_adapter
 from allauth.account import app_settings as allauth_settings
-#from allauth.utils import (email_address_exists, get_username_max_length)
-#from allauth.account.utils import setup_user_email
+
 
 class CustomLoginSerializer(ModelSerializer,LoginSerializer):
     class Meta:

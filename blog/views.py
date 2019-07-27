@@ -7,14 +7,22 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.parsers import JSONParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser,FileUploadParser
+
 
 class PostingViewSet(viewsets.ModelViewSet):
+    #parser_classes = (MultiPartParser,JSONParser)
     queryset = Posting.objects.all()
     serializer_class = PostingSerializer
     #permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(author=self.request.user)
+    
+
+
+    
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
