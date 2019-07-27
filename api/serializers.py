@@ -1,11 +1,11 @@
 #from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from rest_framework import serializers
-from .models import Pictures, Post
+from .models import Post#,Pictures 
 
-class PictureSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Pictures
-        fields = ('picture',)
+# class PictureSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Pictures
+#         fields = ('picture',)
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
