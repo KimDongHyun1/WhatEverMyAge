@@ -9,7 +9,12 @@ from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser,FileUploadParser
 from rest_framework.decorators import api_view
+from rest_framework import generics
 
+
+# class PostingDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Posting.objects.all()
+#     serializer_class = PostingSerializer
 
 @api_view(['GET', 'POST'])
 def post_list(request):
@@ -26,8 +31,8 @@ def post_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        def perform_create(self, serializer):
-           serializer.save(author=self.request.user)
+#         def perform_create(self, serializer):
+#            serializer.save(author=self.request.user)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -50,8 +55,7 @@ def post_detail(request, pk):
 
     elif request.method == 'DELETE':
         posting.delete()
-        return Response({'DELETE SUCCESS' : 'DELETE SUCCESS'}, status=status.HTTP_204_NO_CONTENT)
-
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class PostingViewSet(viewsets.ModelViewSet):
