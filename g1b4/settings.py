@@ -137,8 +137,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #image 추가하기 위해 만든 것
-# MEDIA_URL =  '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL =  '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 #회원가입 , 로그인
 AUTH_USER_MODEL = 'users.CustomerUser' 
