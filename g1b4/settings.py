@@ -168,3 +168,4 @@ REST_AUTH_SERIALIZERS = {
     #'TOKEN_SERIALIZER': 'Project.path.to.MyCustomTokenSerializer',
 }
 
+
