@@ -3,14 +3,14 @@ from django.utils import timezone
 from users.models import CustomerUser
 
 class Posting(models.Model):
-    author = models.ForeignKey(CustomerUser, on_delete='CASCADE',blank=True, null=True) #, )
+    author = models.ForeignKey(CustomerUser, on_delete='CASCADE', blank=True, null=True)
     title = models.CharField(max_length=100, blank=True)
     like = models.IntegerField(default=0, blank=True)
     content = models.TextField(blank=True)
     photo = models.ImageField(null=True, default=None, blank=True) #default = "경로/사진.jpg" 지정하면 기본사진으로 됨
     gps1 = models.DecimalField(blank=True, max_digits=19, decimal_places=10,default=0.0)
     gps2 = models.DecimalField(blank=True, max_digits=19, decimal_places=10,default=0.0)
-    cocoment= models.IntegerField(default=0, blank=True)
+    cnt = models.IntegerField(default=0, blank=True)
 #    created = models.DateTimeField(auto_now_add=True)
 #    updated = models.DateTimeField(auto_now=True)    
 
