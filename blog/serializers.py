@@ -7,17 +7,16 @@ from rest_framework.fields import ReadOnlyField
 
 
 class PostingSerializer(serializers.ModelSerializer): #Hyperlinked
-    author_username = serializers.ReadOnlyField(source='author.username')
+#    author_username = serializers.ReadOnlyField(source='author.username')
     class Meta:
         model = Posting
-        fields = ('author_username','title','id','like','content','photo','lat','lng','cnt')
-  #      fields = ('author_username','title','like','content','photo','gps1','gps2','cocoment','id')
+        fields = ('author_username','author_id','title','id','like','content','photo','lat','lng','cnt')
 
 
 
 
 class PostingDetailSerializer(serializers.HyperlinkedModelSerializer):
-    author_username = ReadOnlyField(source='author.username')
+#    author_username = ReadOnlyField(source='author.username')
     class Meta:
         model = Posting
         fields = ('title','id','author_username')
@@ -26,9 +25,9 @@ class PostingDetailSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    author_username = ReadOnlyField(source='author.username')
+#    author_username = ReadOnlyField(source='author.username')
     #posting = ReadOnlyField(source='posting')
     class Meta:
         model = Comment
-        fields = ('posting','reply','author_username')#(,'posting','reply','c_created','c_updated')
+        fields = ('posting','reply')#(,'posting','reply','c_created','c_updated')
 
