@@ -10,8 +10,8 @@ class Posting(models.Model):
     like = models.IntegerField(default=0, blank=True)
     content = models.TextField(blank=True)
     photo = models.ImageField(null=True, default=None, blank=True)
-    lat = models.DecimalField(blank=True, max_digits=19, decimal_places=10)
-    lng = models.DecimalField(blank=True, max_digits=19, decimal_places=10)
+    lat = models.DecimalField(blank=True, max_digits=10, decimal_places=10)
+    lng = models.DecimalField(blank=True, max_digits=10, decimal_places=10)
     cnt = models.IntegerField(default=0, blank=True)
 
 
