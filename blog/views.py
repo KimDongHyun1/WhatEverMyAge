@@ -11,28 +11,32 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser,FileU
 from rest_framework.decorators import api_view
 from rest_framework import generics
 
-
-# class PostingDetailView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Posting.objects.all()
-#     serializer_class = PostingSerializer
-
-@api_view(['GET', 'POST'])
-def post_list(request):   
-
-    if request.method == 'GET':
-        postings = Posting.objects.all()
-        serializer = PostingSerializer(postings, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = PostingSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class PostingList(generics.ListCreateAPIView):
+    queryset = Posting.objects.all()
+    serializer_class = PostingSerializer
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user) 
+        serializer.save(author=self.request.user)     
+
+
+
+# @api_view(['GET', 'POST'])
+# def post_list(request):   
+
+#     if request.method == 'GET':
+#         postings = Posting.objects.all()
+#         serializer = PostingSerializer(postings, many=True)
+#         return Response(serializer.data)
+
+#     elif request.method == 'POST':
+#         serializer = PostingSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+#     def perform_create(self, serializer):
+#         serializer.save(author=self.request.user) 
 
 
 
