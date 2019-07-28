@@ -5,7 +5,7 @@ from users.models import CustomerUser
 class Posting(models.Model):
 #    author = models.ForeignKey(CustomerUser, on_delete='CASCADE', blank=True, null=True)
     author_username = models.TextField(blank=True)
-    author_id = models.IntegerField(blank=True)
+    author_id = models.IntegerField(default=0, blank=True)
     title = models.CharField(max_length=100, blank=True)
     like = models.IntegerField(default=0, blank=True)
     content = models.TextField(blank=True)
