@@ -24,7 +24,7 @@ class PostingDetailSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-#    author_username = ReadOnlyField(source='author.username')
+    #author_username = ReadOnlyField(source='author.username')
     #posting = ReadOnlyField(source='posting')
     class Meta:
         model = Comment
