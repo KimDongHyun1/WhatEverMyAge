@@ -8,8 +8,8 @@ class Posting(models.Model):
     like = models.IntegerField(default=0, blank=True)
     content = models.TextField(blank=True)
     photo = models.ImageField(null=True, default=None, blank=True) #default = "경로/사진.jpg" 지정하면 기본사진으로 됨
-    gps1 = models.DecimalField(blank=True, max_digits=19, decimal_places=10,default=0.0)
-    gps2 = models.DecimalField(blank=True, max_digits=19, decimal_places=10,default=0.0)
+    lat = models.DecimalField(blank=True, max_digits=19, decimal_places=10,default=0.0)
+    lng = models.DecimalField(blank=True, max_digits=19, decimal_places=10,default=0.0)
     cnt = models.IntegerField(default=0, blank=True)
 #    created = models.DateTimeField(auto_now_add=True)
 #    updated = models.DateTimeField(auto_now=True)    
