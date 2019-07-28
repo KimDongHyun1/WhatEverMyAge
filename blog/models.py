@@ -13,11 +13,16 @@ class Posting(models.Model):
     lat = models.DecimalField(blank=True, max_digits=19, decimal_places=10, null=True)
     lng = models.DecimalField(blank=True, max_digits=19, decimal_places=10, null=True)
     cnt = models.IntegerField(default=0, blank=True)
+    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
+    class Meta:
+        ordering = ['-created']    
 
 
 class Comment(models.Model):
 #    author = models.ForeignKey(CustomerUser, on_delete='CASCADE',blank=True, null=True)
+    author_username = models.TextField(blank=True)
+    author_id = models.IntegerField(default=0, blank=True)
     posting = models.ForeignKey(Posting, on_delete='CASCADE',blank=True, null=True)
     reply = models.TextField(max_length=200, blank=False)
 #    c_created = models.DateTimeField(auto_now_add=True)

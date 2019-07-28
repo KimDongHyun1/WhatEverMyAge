@@ -20,7 +20,6 @@ class PostingDetailSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Posting
         fields = ('title','id')
-    #    fields = ('id','author_username','title','like','content','photo','gps','created','updated')
 
 
 
@@ -29,5 +28,5 @@ class CommentSerializer(serializers.ModelSerializer):
     #posting = ReadOnlyField(source='posting')
     class Meta:
         model = Comment
-        fields = ('posting','reply')#(,'posting','reply','c_created','c_updated')
+        fields = ('posting','reply','id','author_username','author_id')#(,'posting','reply','c_created','c_updated')
 
