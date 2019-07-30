@@ -48,5 +48,7 @@ def post_comments(request, pk):
         serializer = CommentSerializer(comments, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+    
+
 #    def perform_create(self, serializer):
 #        serializer.save(author=self.request.user)

@@ -19,7 +19,7 @@ class PostingDetailSerializer(serializers.HyperlinkedModelSerializer):
 #    author_username = ReadOnlyField(source='author.username')
     class Meta:
         model = Posting
-        fields = ('title','id')
+        fields = ('title','id','content')
 
 
 
