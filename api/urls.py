@@ -8,8 +8,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('question/', include('question.urls')),
     path('users/', include('users.urls')),
-    #path('a', UserUploadedPicture.as_view()), 
-
+    path('a', UserUploadedPicture.as_view()), 
     path('abc/', post_list),
 ]
 
