@@ -9,7 +9,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 
 class UserUploadedPicture(APIView):
-    parser_classes = (MultiPartParser, FormParser)
+    parser_classes = (MultiPartParser, JSONParser) #FormParser
 
     def get(self, request, format=None):
         pictures = Pictures.objects.all()
@@ -23,7 +23,7 @@ class UserUploadedPicture(APIView):
                     return Response(file_serializer.data, status=status.HTTP_201_CREATED)
             else:
                     return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-                    
+
     # def post(self, request, format=None):
     #     print(request.data)
     #     print("\n\n\n")
