@@ -2,7 +2,8 @@ from django.db import models
 
 
 class Pictures(models.Model):
-    picture = models.ImageField(null=True, default=None, blank=True)
+    picture = models.FileField(upload_to='')
+    #picture = models.ImageField(null=True, default=None, blank=True)
 
 
 class Post(models.Model):
