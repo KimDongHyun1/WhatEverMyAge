@@ -8,18 +8,8 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('question/', include('question.urls')),
     path('users/', include('users.urls')),
-    path('a', UserUploadedPicture.as_view()), 
-    path('abc/', post_list),
+    path('a/', UserUploadedPicture.as_view()),
+
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)
-
-
-
-
-
-
-
-
-
-
