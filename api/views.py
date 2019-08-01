@@ -4,21 +4,34 @@ from rest_framework.views import APIView
 from rest_framework import status
 from .serializers import PostSerializer,PictureSerializer
 from django.http import JsonResponse
-from .models import Post
+from .models import Post, Pictures
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 
 class UserUploadedPicture(APIView):
-    parser_classes = (MultiPartParser, )
+    parser_classes = (MultiPartParser, FormParser)
 
-    def post(self, request, format=None):
-        print(request.data)
-        print("\n\n\n")
-        serializer = PictureSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+    def get(self, request, format=None):
+        pictures = Pictures.objects.all()
+        serializer = PictureSerializer(pictures, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+            file_serializer = PictureSerializer(data=request.data)
+            if file_serializer.is_valid():
+                    file_serializer.save()
+                    return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                    return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    
+    # def post(self, request, format=None):
+    #     print(request.data)
+    #     print("\n\n\n")
+    #     serializer = PictureSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return JsonResponse(serializer.data)
+    #     return JsonResponse(serializer.errors, status=400)
 
 @api_view(['GET', 'POST'])
 def post_list(request):
