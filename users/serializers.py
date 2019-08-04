@@ -1,12 +1,11 @@
 from rest_framework.serializers import ModelSerializer, Serializer
+from rest_framework import serializers
 from .models import CustomerUser
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_auth.serializers import LoginSerializer
-from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from allauth.account.adapter import get_adapter
 from allauth.account import app_settings as allauth_settings
-
 
 class CustomLoginSerializer(ModelSerializer,LoginSerializer):
     class Meta:
@@ -17,7 +16,8 @@ class MyCustomTokenSerializer(serializers.ModelSerializer):
     user = CustomLoginSerializer(read_only=True)
     class Meta:
         model = Token
-        fields = ('key', 'user')
+        fields = ['key', 'user']
+
 
 class CustomRegisterSerializer(ModelSerializer,RegisterSerializer):
     class Meta:
@@ -31,10 +31,6 @@ class CustomRegisterSerializer(ModelSerializer,RegisterSerializer):
     def validate_username(self, username):
         username = get_adapter().clean_username(username)
         return username
-
-    #def validate_image(self, image):
-    #     image = get_adapter().clean_image(image)
-    #    return image   
 
     def validate_password1(self, password):
         return get_adapter().clean_password(password)    
@@ -71,7 +67,7 @@ class CustomSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'username', 'user_photo']
 
 class UserSerializer(serializers.ModelSerializer):
-    user_photo = serializers.FileField(use_url=True) #댓글떄도 써보기
+    user_photo = serializers.FileField(use_url=True)
 
     class Meta:
         model = CustomerUser

@@ -10,5 +10,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('postings/', PostingList.as_view()),
     path('postings/<int:pk>', PostingDetail.as_view()),
-    path('postings/<int:pk>/comments', post_comments, name="post_comments")
+    path('postings/<int:pk>/comments', post_comments, name="post_comments"),
+
 ]

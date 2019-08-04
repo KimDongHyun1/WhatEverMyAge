@@ -7,10 +7,8 @@ urlpatterns = [
     path('registration', RegisterUserView.as_view()),
     path('login', CustomLogin.as_view()),
     path('logout', CustomLogout.as_view()),
-    path('users',UserView.as_view()),
-
-
     path('', include('rest_auth.urls')),
+    path('users',UserView.as_view()),
     path('<int:pk>', UserDetailView.as_view()),
 
 ]

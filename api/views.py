@@ -12,7 +12,7 @@ class UserUploadedPicture(APIView):
         serializer = PictureSerializer(pictures, many=True)
         return Response(serializer.data)
 
-    parser_classes = (MultiPartParser,) # JSONParser , FormParser
+    parser_classes = (MultiPartParser, JSONParser)
     def post(self, request, *args, **kwargs):
         file_serializer = PictureSerializer(data=request.data)
         if file_serializer.is_valid():

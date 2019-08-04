@@ -1,4 +1,4 @@
-from .serializers import UserSerializer,CustomLoginSerializer,CustomRegisterSerializer,LoginSerializer
+from .serializers import *
 from .models import CustomerUser
 from rest_framework import generics
 from rest_auth.views import LoginView, LogoutView
@@ -13,7 +13,6 @@ from rest_framework import serializers
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, permission_classes
-
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
@@ -26,7 +25,7 @@ from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.parsers import FileUploadParser
 from rest_framework import authentication, permissions
-
+from rest_framework.parsers import MultiPartParser, JSONParser
 
 class RegisterUserView(generics.ListCreateAPIView):
     queryset = CustomerUser.objects.all()
@@ -44,17 +43,11 @@ class RegisterUserView(generics.ListCreateAPIView):
 
         return Response(data=serializer.errors ,status=status.HTTP_400_BAD_REQUEST)
 
-       
 
 class CustomLogin(LoginView):
     authentication_classes = (authentication.TokenAuthentication,)
     queryset = CustomerUser.objects.all()
     serializer_class = CustomLoginSerializer
-
-
-    # def get_queryset(self):
-    # user = self.request.user
-    # return Purchase.objects.filter(purchaser=user
 
 
 class CustomLogout(LogoutView):
@@ -63,10 +56,12 @@ class CustomLogout(LogoutView):
 
 
 class UserView(generics.ListCreateAPIView):
+    parser_classes = (MultiPartParser, JSONParser)
     queryset = CustomerUser.objects.all()
     serializer_class = UserSerializer
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    parser_classes = (MultiPartParser, JSONParser)
     queryset = CustomerUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = CustomSerializer
 
