@@ -14,6 +14,7 @@ class Posting(models.Model):
     lng = models.DecimalField(blank=True, max_digits=19, decimal_places=10, null=True)
     cnt = models.IntegerField(default=0, blank=True)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    likedusers = models.TextField(default="")
 
     class Meta:
         ordering = ['-created']    

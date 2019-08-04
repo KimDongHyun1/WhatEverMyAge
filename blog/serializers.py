@@ -8,6 +8,7 @@ from rest_framework.fields import ReadOnlyField
 
 class PostingSerializer(serializers.ModelSerializer): #Hyperlinked
 #    author_username = serializers.ReadOnlyField(source='author.username')
+    likedusers = serializers.ListField( child=serializers.IntegerField(min_value=0, max_value=100) , default="")
     class Meta:
         model = Posting
         fields = '__all__'
