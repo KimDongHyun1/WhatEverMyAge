@@ -16,7 +16,6 @@ from django.http import JsonResponse
 
 
 class PostingList(generics.ListCreateAPIView):
-    
     parser_classes = (MultiPartParser, JSONParser)
     queryset = Posting.objects.all()
     serializer_class = PostingSerializer
@@ -41,12 +40,14 @@ class CommentViewSet(viewsets.ModelViewSet):
 #    def perform_create(self, serializer):
 #        serializer.save(author=self.request.user)
 
+
+
+
 @csrf_exempt
 def post_comments(request, pk):
     try:
         comments = Posting.objects.get(pk=pk).comment_set.all()
-        Posting.objects.get(pk=pk).cnt=1
-        print(Posting.objects.get(pk=pk).cnt)
+        print(len(Posting.objects.get(pk=pk).comment_set.all()))
     except Posting.DoesNotExist:
         return JsonResponse({'POSTING DOES NOT':'POSTING DOES NOT'})
     except Comment.DoesNotExist:

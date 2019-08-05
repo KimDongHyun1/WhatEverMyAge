@@ -5,7 +5,6 @@ from rest_framework.fields import ReadOnlyField
 
 
 
-
 class PostingSerializer(serializers.ModelSerializer): #Hyperlinked
 #    author_username = serializers.ReadOnlyField(source='author.username')
     likedusers = serializers.ListField( child=serializers.IntegerField(min_value=0, max_value=100) , default="")
@@ -16,8 +15,10 @@ class PostingSerializer(serializers.ModelSerializer): #Hyperlinked
 
 
 
+
 class PostingDetailSerializer(serializers.HyperlinkedModelSerializer):
 #    author_username = ReadOnlyField(source='author.username')
+   
     class Meta:
         model = Posting
         fields = ('title','id','content')
@@ -30,4 +31,5 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('posting','reply','id','author_username','author_id')
+
 
