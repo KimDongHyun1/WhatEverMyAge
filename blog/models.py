@@ -35,7 +35,7 @@ class Comment(models.Model):
 
 # 비밀번호  ,친구추가
 
-class Love(models.Model):
-    lovecnt = models.IntegerField(blank=True, default=0)
+class Like(models.Model):
+    likeCnt = models.IntegerField(blank=True, default=0)
     user = models.ForeignKey(CustomerUser, on_delete=models.CASCADE, related_name='user_set')
     posting = models.ForeignKey(Posting, on_delete=models.CASCADE, related_name='posting_set')
