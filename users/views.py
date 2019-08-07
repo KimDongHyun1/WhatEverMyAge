@@ -65,3 +65,5 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomerUser.objects.all()
     serializer_class = CustomSerializer
 
+
+
