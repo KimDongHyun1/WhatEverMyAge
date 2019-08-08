@@ -32,7 +32,7 @@ class Comment(models.Model):
     posting = models.ForeignKey(Posting, on_delete=models.CASCADE,blank=True, null=True, related_name='comment_set')
     reply = models.TextField(max_length=200, blank=False)
 
-# 비밀번호  ,친구추가
+# 비밀번호
 
 class Like(models.Model):
     likeCnt = models.IntegerField(blank=True, default=1)
