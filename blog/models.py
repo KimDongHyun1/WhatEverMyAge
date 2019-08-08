@@ -15,11 +15,11 @@ class Posting(models.Model):
     cnt = models.IntegerField(default=0, blank=True)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
-
     class Meta:
         ordering = ['-created']    
 
-
+    def __str__(self):        
+        return self.title 
 
 class Comment(models.Model):
     #author = models.ForeignKey(CustomerUser, on_delete='CASCADE',blank=True, null=True)
@@ -27,6 +27,9 @@ class Comment(models.Model):
     author_id = models.IntegerField(blank=True,default=0)
     posting = models.ForeignKey(Posting, on_delete=models.CASCADE,blank=True, null=True, related_name='comment_set')
     reply = models.TextField(max_length=200, blank=False)
+
+    def __str__(self):        
+        return self.reply
 
 # 비밀번호
 
