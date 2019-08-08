@@ -29,7 +29,7 @@ def posting_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-def aaa(request, pk):
+def likeplus(request, pk):
     if request.method == 'GET':
         posting = Posting.objects.get(pk=pk)
         count = posting.like + 1
