@@ -3,21 +3,22 @@ from .models import Question, Q_Comment
 from .serializers import (QuestionSerializer, QuestionDetailSerializer, Q_CommentSerializer, Q_CommentreSerializer) 
 from django.http import JsonResponse, HttpResponse  
 from django.views.decorators.csrf import csrf_exempt  
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser, MultiPartParser
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
+    parser_classes = (MultiPartParser, JSONParser)
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
 
 @csrf_exempt
 def question_detail(request, pk):
-
+    parser_classes = (MultiPartParser, JSONParser)
     try:
         question = Question.objects.get(pk=pk)
     except Question.DoesNotExist:
-        return HttpResponse(status=404)
+        return JsonResponse({'no': 'no'}, status=400)
 
     if request.method == 'GET':
         serializer = QuestionDetailSerializer(question, context={'request':request})

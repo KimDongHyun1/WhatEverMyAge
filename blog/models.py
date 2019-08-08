@@ -14,8 +14,7 @@ class Posting(models.Model):
     lng = models.DecimalField(blank=True, max_digits=19, decimal_places=10, null=True)
     cnt = models.IntegerField(default=0, blank=True)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    likedusers = models.TextField(default="")
-    count = models.IntegerField(default=0, editable=False)
+
 
     class Meta:
         ordering = ['-created']    
@@ -36,6 +35,6 @@ class Comment(models.Model):
 # 비밀번호  ,친구추가
 
 class Like(models.Model):
-    likeCnt = models.IntegerField(blank=True, default=0)
-    user = models.ForeignKey(CustomerUser, on_delete=models.CASCADE, related_name='user_set')
-    posting = models.ForeignKey(Posting, on_delete=models.CASCADE, related_name='posting_set')
+    likeCnt = models.IntegerField(blank=True, default=1)
+    userId = models.ForeignKey(CustomerUser, on_delete=models.CASCADE, related_name='userId_set')
+    postingId = models.ForeignKey(Posting, on_delete=models.CASCADE, related_name='postingId')
