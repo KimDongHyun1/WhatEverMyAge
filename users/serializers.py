@@ -60,14 +60,14 @@ class CustomRegisterSerializer(ModelSerializer,RegisterSerializer):
         return user
         
 class CustomSerializer(serializers.HyperlinkedModelSerializer):
-    user_photo = serializers.FileField(use_url=True)
+#    user_photo = serializers.FileField(use_url=True)
 
     class Meta:
         model = CustomerUser
         fields = ['id', 'username', 'user_photo']
 
 class UserSerializer(serializers.ModelSerializer):
-    user_photo = serializers.FileField(use_url=True)
+#    user_photo = serializers.FileField(use_url=True)
 
     class Meta:
         model = CustomerUser

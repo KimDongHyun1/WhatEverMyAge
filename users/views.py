@@ -28,6 +28,7 @@ from rest_framework import authentication, permissions
 from rest_framework.parsers import MultiPartParser, JSONParser
 
 class RegisterUserView(generics.ListCreateAPIView):
+    parser_classes = (MultiPartParser, JSONParser)
     queryset = CustomerUser.objects.all()
     serializer_class = CustomRegisterSerializer
 

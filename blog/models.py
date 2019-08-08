@@ -9,7 +9,7 @@ class Posting(models.Model):
     title = models.CharField(max_length=100, blank=True)
     like = models.IntegerField(default=0, blank=True)
     content = models.TextField(blank=True)
-    photo = models.FileField(blank=True, null=True) #upload_to=''
+    photo = models.FileField(blank=True, null=True)
     lat = models.DecimalField(blank=True, max_digits=19, decimal_places=10, null=True)
     lng = models.DecimalField(blank=True, max_digits=19, decimal_places=10, null=True)
     cnt = models.IntegerField(default=0, blank=True)
@@ -19,10 +19,6 @@ class Posting(models.Model):
     class Meta:
         ordering = ['-created']    
 
-    def count_changes(self):
-        count = self.change_set.filter(is_public=True).count()
-        self.change_count = count
-        self.save()
 
 
 class Comment(models.Model):

@@ -12,11 +12,6 @@ from rest_framework import generics
 from django.http import JsonResponse
 
 
-# class PostingList(generics.ListCreateAPIView):
-#     parser_classes = (MultiPartParser, JSONParser)
-#     queryset = Posting.objects.all()
-#     serializer_class = PostingSerializer
-
 
 @api_view(['GET', 'POST'])
 def posting_list(request):
@@ -105,30 +100,6 @@ def post_comments(request, pk):
         return JsonResponse(serializer.data, safe=False)
     
 
-
-# class LikeList(generics.ListCreateAPIView):
-#     queryset = Like.objects.all()
-#     serializer_class = LikeSerializer
-
-# @api_view(['GET', 'POST'])
-# def likeplus(request, pk): 
-#     if request.method == 'GET':
-#         like = Like.objects.get(pk=pk)
-#         serializer = LikeSerializer(like, many=True)
-#         return Response(serializer.data)
-
-#     if request.method == 'POST':
-#         like = Like.objects.get(pk=pk)
-#         like.likeCnt = 100
-#         like.save()
-#         return Response({'good':'good'})
-
-
-
-
-
-
-
 @api_view(['GET', 'POST'])
 def like_list(request):
     if request.method == 'GET':
@@ -142,6 +113,7 @@ def like_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST',])  
 def like_detail(request, pk):
