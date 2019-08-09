@@ -9,8 +9,8 @@ router.register('q_comments', views.Q_CommentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('questions/<int:pk>/', views.question_detail),
-    path('questions/<int:pk>/q_comments/', views.question_q_comment), 
+    path('questions/<int:pk>', views.question_detail),
+    path('questions/<int:pk>/q_comments', views.question_q_comment), 
 ]
 
 
