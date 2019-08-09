@@ -18,8 +18,8 @@ class Posting(models.Model):
     class Meta:
         ordering = ['-created']    
 
-    def __str__(self):        
-        return self.title 
+    def __str__(self):     
+        return self.title
 
 class Comment(models.Model):
     #author = models.ForeignKey(CustomerUser, on_delete='CASCADE',blank=True, null=True)

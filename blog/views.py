@@ -74,7 +74,6 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
 class PostingList(generics.ListCreateAPIView):
-    
     parser_classes = (MultiPartParser, JSONParser)
     queryset = Posting.objects.all()
     serializer_class = PostingSerializer
@@ -115,7 +114,7 @@ def like_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST',])  
+@api_view(['POST',])
 def like_detail(request, pk):
     like = Like.objects.get(pk=pk)
     like.likeCnt = 100
