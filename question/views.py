@@ -38,7 +38,6 @@ def question_detail(request, pk):
 
 
 class Q_CommentViewSet(viewsets.ModelViewSet):
-    parser_classes = (MultiPartParser, JSONParser)
     queryset = Q_Comment.objects.all()
     serializer_class = Q_CommentSerializer
 
