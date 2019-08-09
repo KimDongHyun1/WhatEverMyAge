@@ -22,6 +22,7 @@ def posting_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
+
         serializer = PostingSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -97,5 +98,6 @@ def post_comments(request, pk):
     if request.method == 'GET':
         serializer = CommentSerializer(comments, many=True)
         return JsonResponse(serializer.data, safe=False)
+    
     
 

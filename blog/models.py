@@ -32,3 +32,8 @@ class Comment(models.Model):
         return self.reply
 
 # 비밀번호
+
+class Love(models.Model):
+    user = models.ForeignKey(CustomerUser, on_delete=models.CASCADE, blank=True, null=True)
+    postings = models.ForeignKey(Posting, on_delete=models.CASCADE, blank=True, null=True)
+    cnt = models.IntegerField(blank=True, defualt=0)
