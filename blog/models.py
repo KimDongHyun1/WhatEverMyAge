@@ -32,8 +32,3 @@ class Comment(models.Model):
         return self.reply
 
 # 비밀번호
-
-class Like(models.Model):
-    likeCnt = models.IntegerField(blank=True, default=1)
-    userId = models.ForeignKey(CustomerUser, on_delete=models.CASCADE, related_name='userId_set')
-    postingId = models.ForeignKey(Posting, on_delete=models.CASCADE, related_name='postingId')

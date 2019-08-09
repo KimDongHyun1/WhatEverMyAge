@@ -17,7 +17,7 @@ class QuestionDetailSerializer(serializers.HyperlinkedModelSerializer):
 class Q_CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Q_Comment
-        fields = ['id','question','author_username','author_id','q_reply','q_c_created','q_c_updated'] #'url' 넣으면안됨
+        fields = ['id','question','author_username','author_id','q_reply','q_c_created','q_c_updated']
 
 class Q_CommentreSerializer(serializers.ModelSerializer):
     class Meta:

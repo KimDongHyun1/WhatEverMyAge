@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Posting, Comment, Like
-from .serializers import PostingSerializer, CommentSerializer, PostingDetailSerializer, LikeSerializer
+from .models import Posting, Comment
+from .serializers import PostingSerializer, CommentSerializer, PostingDetailSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt  
@@ -99,24 +99,3 @@ def post_comments(request, pk):
         return JsonResponse(serializer.data, safe=False)
     
 
-@api_view(['GET', 'POST'])
-def like_list(request):
-    if request.method == 'GET':
-        like = Like.objects.all()
-        serializer = LikeSerializer(like, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = LikeSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['POST',])
-def like_detail(request, pk):
-    like = Like.objects.get(pk=pk)
-    like.likeCnt = 100
-    like.save()
-    return Response({'good':'good'})

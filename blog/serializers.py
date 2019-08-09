@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from .models import Posting, Comment, Like
+from .models import Posting, Comment
 from rest_framework.fields import ReadOnlyField
-
 
 
 class PostingSerializer(serializers.ModelSerializer):
@@ -12,11 +11,7 @@ class PostingSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
-
-
 class PostingDetailSerializer(serializers.HyperlinkedModelSerializer):
-#    author_username = ReadOnlyField(source='author.username')
    
     class Meta:
         model = Posting
@@ -25,13 +20,9 @@ class PostingDetailSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    #author_username = ReadOnlyField(source='author.username')
+
     class Meta:
         model = Comment
         fields = ('posting','reply','id','author_username','author_id')
 
-class LikeSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Like
-        fields = ('userId', 'postingId', 'likeCnt')
+
