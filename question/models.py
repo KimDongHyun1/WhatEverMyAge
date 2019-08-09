@@ -9,6 +9,7 @@ class Question(models.Model):
     q_photo = models.FileField(blank=True, null=True)
     author_username = models.TextField(blank=True, null=True)
     author_id = models.IntegerField(default=0, blank=True)
+    cnt = models.IntegerField(default=0, blank=True)
 
     class Meta:
         ordering = ['-q_created']

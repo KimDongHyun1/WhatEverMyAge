@@ -6,17 +6,23 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser, MultiPartParser
 
 
+
 class QuestionViewSet(viewsets.ModelViewSet):
+
     parser_classes = (MultiPartParser, JSONParser)
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
+    
 
 @csrf_exempt
 def question_detail(request, pk):
     parser_classes = (MultiPartParser, JSONParser)
     try:
+        comments = Question.objects.get(pk=pk).q_comment_set.all()
+        Question.objects.filter(pk=pk).update(cnt=len(comments)) 
         question = Question.objects.get(pk=pk)
+        
     except Question.DoesNotExist:
         return JsonResponse({'no': 'no'}, status=400)
 

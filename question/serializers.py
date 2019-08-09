@@ -11,7 +11,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 class QuestionDetailSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Question
-        fields = ['q_title','q_content', 'q_created']
+        fields = ['q_title','q_content', 'q_created','cnt']
 
 
 class Q_CommentSerializer(serializers.ModelSerializer):
