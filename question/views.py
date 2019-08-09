@@ -54,5 +54,5 @@ def question_q_comment(request, pk):
         return HttpResponse(status=404)
 
     if(request.method=='GET'):
-        serializer = Q_CommentreSerializer(q_comment, many=True)
+        serializer = Q_CommentSerializer(q_comment, many=True)
         return JsonResponse(serializer.data, safe=False)
